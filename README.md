@@ -8,3 +8,8 @@ To conduct this I used the BOW, Bag Of Words Method
 ```
 pip install pandas sklearn scikit-learn
 ```
+# Running
+```
+python app.py
+```
+go to local host http://127.0.0.1:5000/
