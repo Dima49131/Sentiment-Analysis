@@ -10,7 +10,8 @@ data = {
         "This is the worst experience ever.",
         "Absolutely fantastic! Highly recommend!",
         "Not worth the money.",
-        "I am very satisfied with my purchase."
+        "I am very satisfied with my purchase.",
+        "Deez Nuts"
     ],
     'sentiment': ['positive', 'negative', 'positive', 'negative', 'positive']
 }

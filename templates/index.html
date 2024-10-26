@@ -1,0 +1,55 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background-color: #f2f2f2; }
+        
+        /* Positive (Green) and Negative (Red) Formatting */
+        .positive { background-color: rgba(0, 255, 0, 0.455); font-weight: bold; }
+        .negative { background-color: rgba(255, 0, 0, 0.638); font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Sentiment Analysis Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Review</th>
+                <th>Predicted Sentiment</th>
+                <th>Actual Sentiment</th>
+            </tr>
+        </thead>
+        <tbody id="resultsTable">
+            <!-- Results will be populated here -->
+        </tbody>
+    </table>
+
+    <script>
+        // Fetch results from the back-end and populate table
+        fetch('/results')
+            .then(response => response.json())
+            .then(data => {
+                const resultsTable = document.getElementById('resultsTable');
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+
+                    // Set CSS classes based on sentiment value
+                    const predictedClass = row['Predicted Sentiment'] === 'positive' ? 'positive' : 'negative';
+                    const actualClass = row['Actual Sentiment'] === 'positive' ? 'positive' : 'negative';
+
+                    tr.innerHTML = `<td class="${actualClass}">${row.Review}</td>
+                                    <td class="${predictedClass}">${row['Predicted Sentiment']}</td>
+                                    <td class="${actualClass}">${row['Actual Sentiment']}</td>`;
+                    resultsTable.appendChild(tr);
+                });
+            });
+    </script>
+</body>
+</html>
